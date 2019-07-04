@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/mo_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -12,7 +12,7 @@
         android:text="Name"/>
 
     <EditText
-        android:id="@+id/phnumber"
+        android:id="@+id/mo_phnumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -20,7 +20,7 @@
         android:text="phnumber" />
 
     <EditText
-        android:id="@+id/pdate"
+        android:id="@+id/mo_pdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -28,7 +28,7 @@
         android:text="date" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/mo_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button" />

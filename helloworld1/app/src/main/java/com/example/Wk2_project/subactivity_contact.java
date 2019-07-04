@@ -89,9 +89,13 @@ public class subactivity_contact extends Activity {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show();
-                new JSONTask3().execute("http://143.248.38.245:8080/api/books/"+id);
-                finish();
+                Toast.makeText(view.getContext(), "수정", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(subactivity_contact.this, Contactmodify_Activity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("name", Name);
+                intent.putExtra("ph_num", Ph_number);
+                intent.putExtra("image_id", photo_id);
+                startActivity(intent);
             }
         });
 

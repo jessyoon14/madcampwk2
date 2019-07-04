@@ -41,6 +41,8 @@
 
         <activity android:name="com.example.Wk2_project.MainActivity">
         </activity>
+        <activity android:name="com.example.Wk2_project.Contactmodify_Activity">
+        </activity>
 
 
         <activity android:name="com.example.Wk2_project.subActivity1">

@@ -151,6 +151,8 @@ public class PreActivity extends AppCompatActivity {
                     public void onSuccess(LoginResult loginResult) {
                         // App code
                         Toast.makeText(PreActivity.this, "Facebook Login successful", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(PreActivity.this, MainActivity.class);
+                        startActivity(i);
                     }
 
                     @Override
@@ -175,6 +177,8 @@ public class PreActivity extends AppCompatActivity {
                 // Retrieving access token using the LoginResult
                 AccessToken accessToken = loginResult.getAccessToken();
                 useLoginInformation(accessToken);
+                Intent i = new Intent(PreActivity.this, MainActivity.class);
+                startActivity(i);
             }
 
             @Override
@@ -210,6 +214,7 @@ public class PreActivity extends AppCompatActivity {
                         Toast.makeText(PreActivity.this, ""+response, Toast.LENGTH_SHORT).show();
                         if (response == "Registration success"){
                             //make a new DB for this user!!!!!
+
                         }
                     }
 
@@ -233,8 +238,11 @@ public class PreActivity extends AppCompatActivity {
             @Override
             public void accept(String response) throws Exception {
                 Toast.makeText(PreActivity.this, ""+response, Toast.LENGTH_SHORT).show();
-                if (response == "Login success"){
-                    //Move to next activity
+                Log.i("bcd", response);
+                if (response.equals("\"Login success\"")){
+                    Log.i("asd", response);
+                    Intent i = new Intent(PreActivity.this, MainActivity.class);
+                    startActivity(i);
                 }
             }
 
