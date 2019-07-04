@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">dbservertest</string>
+    <string name="facebook_app_id">500270134114107</string>
+    <string name="fb_login_protocol_scheme">fb500270134114107</string>
+</resources>
