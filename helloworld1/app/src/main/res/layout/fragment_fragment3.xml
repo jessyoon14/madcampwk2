@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+
+    >
+
+    <CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="313dp"
+        android:layout_weight="0" />
+
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="0"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textFontWeight="50"
+        android:textSize="18dp" />
+
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/text_content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="66dp"-->
+            <!--android:layout_weight="0"-->
+            <!--android:text="TextView" />-->
+    <!--</ScrollView>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_memo"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_weight="0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/round_add_24" />
+
+</LinearLayout>
