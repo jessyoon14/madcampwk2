@@ -35,21 +35,18 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.util.Arrays;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 ///https://www.youtube.com/watch?time_continue=114&v=4Xq2FUJvE-c
-public class MainActivity extends AppCompatActivity {
+public class PreActivity extends AppCompatActivity {
 
     TextView txt_create_account, displayName, emailID;
     ImageView displayImage;
@@ -74,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pre);
 
         //Init Service
         Retrofit retrofitClient = RetrofitClient.getInstance();
@@ -97,10 +94,10 @@ public class MainActivity extends AppCompatActivity {
         txt_create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                final View register_layout = LayoutInflater.from(MainActivity.this)
+                final View register_layout = LayoutInflater.from(PreActivity.this)
                         .inflate(R.layout.register_layout, null);
 
-                new MaterialStyledDialog.Builder(MainActivity.this)
+                new MaterialStyledDialog.Builder(PreActivity.this)
                         .setTitle("REGISTRATION")
                         .setDescription("Please fill all fields")
                         .setCustomView(register_layout)
@@ -119,16 +116,16 @@ public class MainActivity extends AppCompatActivity {
                                 MaterialEditText edt_register_name = (MaterialEditText) register_layout.findViewById(R.id.edt_name);
                                 MaterialEditText edt_register_password = (MaterialEditText) register_layout.findViewById(R.id.edt_password);
                                 if (TextUtils.isEmpty(edt_register_email.getText().toString())) {
-                                    Toast.makeText(MainActivity.this, "Email cannot be null or empty", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PreActivity.this, "Email cannot be null or empty", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                                 if (TextUtils.isEmpty(edt_register_name.getText().toString())) {
-                                    Toast.makeText(MainActivity.this, "Name cannot be null or empty", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PreActivity.this, "Name cannot be null or empty", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (TextUtils.isEmpty(edt_register_password.getText().toString())) {
-                                    Toast.makeText(MainActivity.this, "Password cannot be null or empty", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PreActivity.this, "Password cannot be null or empty", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
@@ -153,19 +150,19 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         // App code
-                        Toast.makeText(MainActivity.this, "Facebook Login successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PreActivity.this, "Facebook Login successful", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCancel() {
                         // App code
-                        Toast.makeText(MainActivity.this, "Facebook Login Cancelled", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PreActivity.this, "Facebook Login Cancelled", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
-                        Toast.makeText(MainActivity.this, "Facebook Login Error!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PreActivity.this, "Facebook Login Error!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -174,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 //App code
-                Toast.makeText(MainActivity.this, "Facebook Login successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PreActivity.this, "Facebook Login successful", Toast.LENGTH_SHORT).show();
                 // Retrieving access token using the LoginResult
                 AccessToken accessToken = loginResult.getAccessToken();
                 useLoginInformation(accessToken);
@@ -183,13 +180,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancel() {
                 // App code
-                Toast.makeText(MainActivity.this, "Facebook Login Cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PreActivity.this, "Facebook Login Cancelled", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException exception) {
                 // App code
-                Toast.makeText(MainActivity.this, "Facebook Login Error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PreActivity.this, "Facebook Login Error!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -210,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String response) throws Exception {
-                        Toast.makeText(MainActivity.this, ""+response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PreActivity.this, ""+response, Toast.LENGTH_SHORT).show();
                         if (response == "Registration success"){
                             //make a new DB for this user!!!!!
                         }
@@ -235,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
         .subscribe(new Consumer<String>() {
             @Override
             public void accept(String response) throws Exception {
-                Toast.makeText(MainActivity.this, ""+response, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PreActivity.this, ""+response, Toast.LENGTH_SHORT).show();
             }
 
         }));
