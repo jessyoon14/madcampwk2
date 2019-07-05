@@ -47,7 +47,7 @@ import retrofit2.Retrofit;
 
 ///https://www.youtube.com/watch?time_continue=114&v=4Xq2FUJvE-c
 public class PreActivity extends AppCompatActivity {
-
+    DBHelper dbHelper = new DBHelper(PreActivity.this, "Email.db", null, 1);
     TextView txt_create_account, displayName, emailID;
     ImageView displayImage;
     MaterialEditText edt_login_email,edt_login_password;
@@ -152,7 +152,8 @@ public class PreActivity extends AppCompatActivity {
                         // App code
                         Toast.makeText(PreActivity.this, "Facebook Login successful", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(PreActivity.this, MainActivity.class);
-                        i.putExtra("email",edt_login_email.getText());
+
+                        dbHelper.insert("email",edt_login_email.getText().toString());
                         startActivity(i);
                     }
 
@@ -179,7 +180,8 @@ public class PreActivity extends AppCompatActivity {
                 AccessToken accessToken = loginResult.getAccessToken();
                 useLoginInformation(accessToken);
                 Intent i = new Intent(PreActivity.this, MainActivity.class);
-                i.putExtra("email",edt_login_email.getText());
+                dbHelper.insert("email",edt_login_email.getText().toString());
+
                 startActivity(i);
             }
 
@@ -244,7 +246,7 @@ public class PreActivity extends AppCompatActivity {
                 if (response.equals("\"Login success\"")){
                     Log.i("asd", response);
                     Intent i = new Intent(PreActivity.this, MainActivity.class);
-                    i.putExtra("email",edt_login_email.getText());
+                    dbHelper.insert("email",edt_login_email.getText().toString());
                     startActivity(i);
                 }
             }

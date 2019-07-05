@@ -10,28 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5178527-b5d3-46d7-acb8-664f4b783b14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg3_Memo/Adapter_memo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../comeon/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../comeon/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Adapter_memo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/AddMemo_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg3_Memo/AddMemo_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/ContactInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/ContactInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/ContactaddActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/ContactaddActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Contactmodify_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/Contactmodify_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/DBHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/DBHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/DeleteMemo_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg3_Memo/DeleteMemo_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/FullImageActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg2_gallary/FullImageActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/MemoInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg3_Memo/MemoInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/ModifyMemo_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg3_Memo/ModifyMemo_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/MyAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/MyAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/PreActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/PreActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/subactivity_contact.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_contactadd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_contactadd.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="74" column="29" selection-start-line="74" selection-start-column="29" selection-end-line="74" selection-end-column="29" />
+            <state relative-caret-position="532">
+              <caret line="183" column="57" lean-forward="true" selection-start-line="183" selection-start-column="20" selection-end-line="183" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -60,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/PreActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2693">
-              <caret line="181" column="46" selection-start-line="181" selection-start-column="46" selection-end-line="181" selection-end-column="46" />
+            <state relative-caret-position="280">
+              <caret line="253" column="12" lean-forward="true" selection-start-line="253" selection-start-column="12" selection-end-line="253" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -140,13 +119,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/Contactmodify_Activity.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg3_Memo/Adapter_memo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-1729">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -168,8 +144,8 @@
       <find>fab</find>
       <find>intent</find>
       <find>edittext</find>
-      <find>edt_login_email</find>
       <find>act</find>
+      <find>edt_login_email</find>
       <find>start</find>
     </findStrings>
   </component>
@@ -203,14 +179,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment1.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_contactadd.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/ContactaddActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/PreActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/PreActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="1912" />
+    <option name="y" value="-17" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -249,7 +225,7 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="Wk2_project" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="Fg1_Contact" type="462c0819:PsiDirectoryNode" />
+              <item name="Fg3_Memo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="helloworld1" type="1abcf292:AndroidViewProjectNode" />
@@ -385,8 +361,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="1912" y="-17" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.79812205" visible="true" weight="0.26439232" />
@@ -582,20 +557,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg3_Memo/Adapter_memo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg3_Memo/AddMemo_Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg2_gallary/FullImageActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -659,13 +620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="74" column="29" selection-start-line="74" selection-start-column="29" selection-end-line="74" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/ContactaddActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1330">
@@ -697,10 +651,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg3_Memo/AddMemo_Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg3_Memo/Adapter_memo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1729">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="183" column="57" lean-forward="true" selection-start-line="183" selection-start-column="20" selection-end-line="183" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/PreActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2693">
-          <caret line="181" column="46" selection-start-line="181" selection-start-column="46" selection-end-line="181" selection-end-column="46" />
+        <state relative-caret-position="280">
+          <caret line="253" column="12" lean-forward="true" selection-start-line="253" selection-start-column="12" selection-end-line="253" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
