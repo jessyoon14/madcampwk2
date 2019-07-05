@@ -1,10 +1,12 @@
-package com.example.Wk2_project;
+package com.example.Wk2_project.Fg3_Memo;
 
 
         import android.content.Intent;
         import android.os.Bundle;
 
         import androidx.appcompat.app.AppCompatActivity;
+
+        import com.example.Wk2_project.DBHelper;
 
 public class DeleteMemo_Activity extends AppCompatActivity {
 

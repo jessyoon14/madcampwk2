@@ -1,4 +1,4 @@
-package com.example.Wk2_project;
+package com.example.Wk2_project.Fg2_gallary;
 
 
 import android.app.Activity;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.Wk2_project.R;
 
 import java.io.File;
 

@@ -23,6 +23,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.Wk2_project.Fg2_gallary.FullImageActivity;
 
 import java.io.File;
 import java.io.IOException;

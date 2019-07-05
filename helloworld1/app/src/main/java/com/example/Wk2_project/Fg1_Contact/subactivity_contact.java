@@ -1,4 +1,4 @@
-package com.example.Wk2_project;
+package com.example.Wk2_project.Fg1_Contact;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -19,10 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Wk2_project.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"/>
+        android:hint="Name"/>
 
     <EditText
         android:id="@+id/phnumber"
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="phnumber" />
+        android:hint="phnumber" />
 
     <EditText
         android:id="@+id/pdate"
@@ -25,11 +25,17 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="date" />
+        android:hint="date" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/bt_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="추가하기" />
+
+    <Button
+        android:id="@+id/bt_get"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="불러오기" />
 </LinearLayout>

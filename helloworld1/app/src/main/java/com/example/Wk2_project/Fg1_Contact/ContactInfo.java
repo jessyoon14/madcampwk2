@@ -1,4 +1,4 @@
-package com.example.Wk2_project;
+package com.example.Wk2_project.Fg1_Contact;
 
 public class ContactInfo {
     public String id;

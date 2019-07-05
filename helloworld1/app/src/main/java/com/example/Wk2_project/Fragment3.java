@@ -17,6 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.Wk2_project.Fg3_Memo.Adapter_memo;
+import com.example.Wk2_project.Fg3_Memo.AddMemo_Activity;
+import com.example.Wk2_project.Fg3_Memo.DeleteMemo_Activity;
+import com.example.Wk2_project.Fg3_Memo.MemoInfo;
+import com.example.Wk2_project.Fg3_Memo.ModifyMemo_Activity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;

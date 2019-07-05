@@ -1,4 +1,4 @@
-package com.example.Wk2_project;
+package com.example.Wk2_project.Fg1_Contact;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.Wk2_project.Fg1_Contact.ContactInfo;
+import com.example.Wk2_project.R;
 
 import org.json.JSONObject;
 

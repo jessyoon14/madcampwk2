@@ -41,28 +41,28 @@
 
         <activity android:name="com.example.Wk2_project.MainActivity">
         </activity>
-        <activity android:name="com.example.Wk2_project.Contactmodify_Activity">
+        <activity android:name="com.example.Wk2_project.Fg1_Contact.Contactmodify_Activity">
         </activity>
 
 
         <activity android:name="com.example.Wk2_project.subActivity1">
         </activity>
-        <activity android:name="com.example.Wk2_project.subactivity_contact">
+        <activity android:name="com.example.Wk2_project.Fg1_Contact.subactivity_contact">
         </activity>
 
 
-        <activity android:name="com.example.Wk2_project.ModifyMemo_Activity">
+        <activity android:name="com.example.Wk2_project.Fg3_Memo.ModifyMemo_Activity">
         </activity>
-        <activity android:name="com.example.Wk2_project.ContactaddActivity">
-        </activity>
-
-        <activity android:name="com.example.Wk2_project.AddMemo_Activity">
+        <activity android:name="com.example.Wk2_project.Fg1_Contact.ContactaddActivity">
         </activity>
 
-        <activity android:name="com.example.Wk2_project.DeleteMemo_Activity">
+        <activity android:name="com.example.Wk2_project.Fg3_Memo.AddMemo_Activity">
         </activity>
 
-        <activity android:name="com.example.Wk2_project.FullImageActivity">
+        <activity android:name="com.example.Wk2_project.Fg3_Memo.DeleteMemo_Activity">
+        </activity>
+
+        <activity android:name="com.example.Wk2_project.Fg2_gallary.FullImageActivity">
         </activity>
 
         <provider

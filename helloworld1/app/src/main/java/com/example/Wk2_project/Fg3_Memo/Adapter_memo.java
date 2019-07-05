@@ -1,4 +1,4 @@
-package com.example.Wk2_project;
+package com.example.Wk2_project.Fg3_Memo;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.Wk2_project.DBHelper;
+import com.example.Wk2_project.Fragment3;
+import com.example.Wk2_project.R;
 
 import java.util.ArrayList;
 
@@ -54,7 +58,7 @@ public class Adapter_memo extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private Context mContext;
     private ArrayList<MemoInfo> MemoInfoArrayList;
 
-    Adapter_memo(Context context, ArrayList<MemoInfo> memoInfoAL){
+    public Adapter_memo(Context context, ArrayList<MemoInfo> memoInfoAL){
         this.mContext = context;
         this.MemoInfoArrayList = memoInfoAL;
     }

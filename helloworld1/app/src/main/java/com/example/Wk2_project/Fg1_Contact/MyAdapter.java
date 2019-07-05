@@ -1,4 +1,4 @@
-package com.example.Wk2_project;
+package com.example.Wk2_project.Fg1_Contact;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.Wk2_project.Fg1_Contact.ContactInfo;
+import com.example.Wk2_project.Fg1_Contact.subactivity_contact;
+import com.example.Wk2_project.R;
 
 import java.util.ArrayList;
 
@@ -40,7 +44,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 }
 
     private ArrayList<ContactInfo> contactInfoArrayList;
-    MyAdapter(ArrayList<ContactInfo> contactInfoAL){
+    public MyAdapter(ArrayList<ContactInfo> contactInfoAL){
         this.contactInfoArrayList = contactInfoAL;
     }
 

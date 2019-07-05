@@ -1,13 +1,17 @@
-package com.example.Wk2_project;
+package com.example.Wk2_project.Fg1_Contact;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.Wk2_project.R;
 
 import org.json.JSONObject;
 
@@ -35,14 +39,15 @@ public class ContactaddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactadd);
 
-        Button btn2 = findViewById(R.id.button);
+        Button btn_add = findViewById(R.id.bt_add);
+        Button btn_get = findViewById(R.id.bt_get);
         name = findViewById(R.id.name);
         phnumber = findViewById(R.id.phnumber);
         date = findViewById(R.id.pdate);
 
 
 
-        btn2.setOnClickListener(new View.OnClickListener(){
+        btn_add.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 mname = name.getText().toString();
@@ -52,8 +57,52 @@ public class ContactaddActivity extends AppCompatActivity {
 
             }
         });
+        btn_get.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(Intent.ACTION_PICK);
+
+                intent.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+
+                startActivityForResult(intent, 5);
+
+
+            }
+        });
 
     }
+
+    @Override
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(resultCode == RESULT_OK)
+
+        {
+
+            Cursor cursor = getContentResolver().query(data.getData(),
+
+                    new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+
+                            ContactsContract.CommonDataKinds.Phone.NUMBER}, null, null, null);
+
+            cursor.moveToFirst();
+
+            mname = cursor.getString(0);        //0은 이름을 얻어옵니다.
+
+            mphnumber = cursor.getString(1);   //1은 번호를 받아옵니다.
+
+            mdate = "date";
+
+            cursor.close();
+
+            new JSONTask1().execute("http://143.248.38.245:8080/api/books");
+
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     public class JSONTask1 extends AsyncTask<String, String, String> {
 
         @Override

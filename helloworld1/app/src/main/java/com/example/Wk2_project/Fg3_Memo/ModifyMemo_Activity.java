@@ -1,4 +1,4 @@
-package com.example.Wk2_project;
+package com.example.Wk2_project.Fg3_Memo;
 
 
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.Wk2_project.DBHelper;
+import com.example.Wk2_project.R;
 
 public class ModifyMemo_Activity extends AppCompatActivity {
 

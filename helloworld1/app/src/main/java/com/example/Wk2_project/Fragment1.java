@@ -1,11 +1,8 @@
 package com.example.Wk2_project;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,6 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.Wk2_project.Fg1_Contact.ContactInfo;
+import com.example.Wk2_project.Fg1_Contact.ContactaddActivity;
+import com.example.Wk2_project.Fg1_Contact.MyAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -43,7 +43,7 @@ public class Fragment1 extends Fragment {
     Button addbutton;
     ArrayList<ContactInfo> dInfoArrayList = new ArrayList<>();
     ArrayList<ContactInfo> contactInfoArrayList = new ArrayList<>();
-    MyAdapter myAdapter;
+    public MyAdapter myAdapter;
     String address;
     String mname;
     String mphnumber;

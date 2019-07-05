@@ -1,4 +1,4 @@
-package com.example.Wk2_project;
+package com.example.Wk2_project.Fg3_Memo;
 
 public class MemoInfo {
     public int id;
