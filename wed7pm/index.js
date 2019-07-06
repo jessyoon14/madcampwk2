@@ -123,7 +123,24 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err,client){
                     }
                 })
         });
+
+        app.post('/addPhoto',(request,response,next)=>
+        {
+            var post_data = request.body;
+            // var insertJson = {
+            //     'email':email,
+            //     'password':password,
+            //     'salt':salt,
+            //     'name':name
+            // };
+            var db = client.db('practicedb');
+            //check exists email
+            db.collection('photos').insertOne(post_data, function(error, res){response.json('Photo add success');console.log('Photo add success');
+        });
+        });   
+        
         //start a web server
+
         app.listen(3000,()=>{
             console.log('Connected to MongoDB Server, WebService running on port 3000');
         })
