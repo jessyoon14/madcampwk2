@@ -43,6 +43,7 @@ module.exports = function(app, Book, Personalc)
         var book = new Book();
         book.email = req.body.email;
         book.contact_list = [];
+        book.image_list = [];
         
         console.log("book title : "+book.email );
 
@@ -80,6 +81,28 @@ module.exports = function(app, Book, Personalc)
         });
     });
 
+    //ADD NEW IMAGE NAME
+    app.post('/api/books/image/:email', function(req, res){
+        Book.findOne({email: req.params.email}, function(err, book){
+            if(err) return res.status(500).json({error: err});
+            if(!book) return res.status(404).json({error: 'book not found'});
+
+            book.image_list.push(req.body.image);
+
+            //res.json(book);
+        
+
+            book.save(function(err){
+                if(err){
+                    console.error(err);
+                    res.json({result: 0});
+                    return;
+                }    
+                res.json({result: 1});    
+            });
+        });
+    });
+
 
     // UPDATE THE BOOK
     app.put('/api/books/:email', function(req, res){
@@ -100,15 +123,26 @@ module.exports = function(app, Book, Personalc)
 
     // DELETE BOOK
     app.delete('/api/books/:email', function(req, res){
-        Book.remove({ _id: req.params.book_id }, function(err, output){
-            if(err) return res.status(500).json({ error: "database failure" });
-    
-            /* ( SINCE DELETE OPERATION IS IDEMPOTENT, NO NEED TO SPECIFY )
-            if(!output.result.n) return res.status(404).json({ error: "book not found" });
-            res.json({ message: "book deleted" });
-            */
-    
-            res.status(204).end();
+        Book.findOne({email: req.params.email}, function(err, book){
+            if(err) return res.status(500).json({error: err});
+            if(!book) return res.status(404).json({error: 'book not found'});
+            
+            for(var i in book.contact_list){
+                if(book.contact_list._id == req.body.id){
+                    break;
+                }
+            }
+            book.contact_list.splice(i,1)
+            //res.status(404).json({_id: req.body.id})
+            //book.contact_list.remove({_id: req.body.id}, function(err, output){
+            //    if(err) return res.status(500).json({error: "database failure"});
+            //    
+            //})
+            book.save(function(err){
+                if(err) res.status(500).json({error: 'failed to update'});
+                res.json({message: 'book updated'});
+            });
+            
         })
     });
 }

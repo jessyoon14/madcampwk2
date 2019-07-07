@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.Wk2_project.PreActivity;
 import com.example.Wk2_project.R;
 
 import org.json.JSONObject;
@@ -35,6 +36,7 @@ public class ContactaddActivity extends AppCompatActivity {
     String mname;
     String mphnumber;
     String mdate;
+    String email = PreActivity.user_email;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactadd);
@@ -53,7 +55,7 @@ public class ContactaddActivity extends AppCompatActivity {
                 mname = name.getText().toString();
                 mphnumber = phnumber.getText().toString();
                 mdate = date.getText().toString();
-                new JSONTask1().execute("http://143.248.38.245:8080/api/books");
+                new JSONTask1().execute("http://143.248.38.245:7080/api/books/"+email);
 
             }
         });
@@ -96,7 +98,7 @@ public class ContactaddActivity extends AppCompatActivity {
 
             cursor.close();
 
-            new JSONTask1().execute("http://143.248.38.245:8080/api/books");
+            new JSONTask1().execute("http://143.248.38.245:7080/api/books/"+email);
 
         }
 
@@ -114,7 +116,7 @@ public class ContactaddActivity extends AppCompatActivity {
 
                 jsonObject.accumulate("name", mname);
                 jsonObject.accumulate("phnumber", mphnumber);
-                jsonObject.accumulate("published_date", mdate);
+                jsonObject.accumulate("date", mdate);
                 HttpURLConnection con = null;
                 BufferedReader reader = null;
 

@@ -9,7 +9,8 @@ var personalSchema = new Schema({
 
 var bookSchema = new Schema({
     email: String,
-    contact_list: [personalSchema]
+    contact_list: [personalSchema],
+    image_list: []
 });
 
 

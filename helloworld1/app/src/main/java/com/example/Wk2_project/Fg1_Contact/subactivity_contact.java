@@ -18,18 +18,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.Wk2_project.PreActivity;
 import com.example.Wk2_project.R;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class subactivity_contact extends Activity {
-
+    String id;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -45,14 +51,15 @@ public class subactivity_contact extends Activity {
         coName = (TextView)findViewById(R.id.co_name);
         coPhone = (TextView)findViewById(R.id.co_phone);
         coImage = (ImageView)findViewById(R.id.co_image);
+        final String email = PreActivity.user_email;
         // get intent data
         Intent i = getIntent();
 
         // Selected image id
         final String Name = i.getExtras().getString("name");
         final String Ph_number = i.getExtras().getString("ph_num");
-        final String id = i.getExtras().getString("id");
-        final long photo_id = i.getExtras().getLong("image_id");
+        id = i.getExtras().getString("id");
+        //final long photo_id = i.getExtras().getLong("image_id");
         coName.setText(Name);
         coPhone.setText(Ph_number);
 
@@ -77,7 +84,7 @@ public class subactivity_contact extends Activity {
             public void onClick(View view) {
 
                 Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show();
-                new JSONTask2().execute("http://143.248.38.245:8080/api/books/"+id);
+                new JSONTask2().execute("http://143.248.38.245:7080/api/books/"+email);
                 finish();
             }
         });
@@ -90,7 +97,7 @@ public class subactivity_contact extends Activity {
                 intent.putExtra("id", id);
                 intent.putExtra("name", Name);
                 intent.putExtra("ph_num", Ph_number);
-                intent.putExtra("image_id", photo_id);
+                //intent.putExtra("image_id", photo_id);
                 startActivity(intent);
             }
         });
@@ -103,7 +110,9 @@ public class subactivity_contact extends Activity {
         protected String doInBackground(String... urls) {
             try {
                 //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
+                JSONObject jsonObject = new JSONObject();
 
+                jsonObject.accumulate("id", id);
                 HttpURLConnection con = null;
                 BufferedReader reader = null;
 
@@ -112,8 +121,21 @@ public class subactivity_contact extends Activity {
                     URL url = new URL(urls[0]);//url을 가져온다.
                     con = (HttpURLConnection) url.openConnection();
                     con.setRequestMethod("DELETE");
+                    con.setRequestProperty("Cache-Control", "no-cache");//캐시 설정
+                    con.setRequestProperty("Content-Type", "application/json");//application JSON 형식으로 전송
+                    con.setRequestProperty("Accept", "text/html");//서버에 response 데이터를 html로 받음
+                    con.setDoOutput(true);//Outstream으로 post 데이터를 넘겨주겠다는 의미
+                    con.setDoInput(true);//Inputstream으로 서버로부터 응답을 받겠다는 의미
                     con.connect();//연결 수행
+                    //서버로 보내기위해서 스트림 만듬
+                    OutputStream outStream = con.getOutputStream();
+                    //버퍼를 생성하고 넣음
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
+                    writer.write(jsonObject.toString());
 
+
+                    writer.flush();
+                    writer.close();//버퍼를 받아줌
                     //입력 스트림 생성
                     InputStream stream = con.getInputStream();
 
