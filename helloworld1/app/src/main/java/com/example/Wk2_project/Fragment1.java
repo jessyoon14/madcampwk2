@@ -1,13 +1,11 @@
 package com.example.Wk2_project;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.Wk2_project.Fg1_Contact.ContactInfo;
+import com.example.Wk2_project.Fg1_Contact.ContactaddActivity;
+import com.example.Wk2_project.Fg1_Contact.MyAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -43,12 +44,15 @@ public class Fragment1 extends Fragment {
     Button addbutton;
     ArrayList<ContactInfo> dInfoArrayList = new ArrayList<>();
     ArrayList<ContactInfo> contactInfoArrayList = new ArrayList<>();
-    MyAdapter myAdapter;
+    public MyAdapter myAdapter;
     String address;
     String mname;
     String mphnumber;
     String mdate;
     JSONArray jarray;
+    JSONObject parray;
+    String email = PreActivity.user_email;
+
 
 
     public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
@@ -56,7 +60,8 @@ public class Fragment1 extends Fragment {
 
     }
     public void getContactList() {
-        new JSONTask().execute("http://143.248.38.245:8080/api/books");
+        Log.i("email", email);
+        new JSONTask().execute("http://143.248.38.245:7080/api/books/" + email);
         dInfoArrayList.clear();
         contactInfoArrayList.clear();
 /*
@@ -156,14 +161,15 @@ public class Fragment1 extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-                jarray = new JSONArray(result);   // JSONArray 생성
+                parray = new JSONObject(result);
+                jarray = parray.getJSONArray("contact_list");   // JSONArray 생성
                 contactInfoArrayList.clear();
                 for(int i=0; i < jarray.length(); i++){
                     JSONObject jObject = jarray.getJSONObject(i);  // JSONObject 추출
                     String id = jObject.getString("_id");
                     String name = jObject.getString("name");
                     String phnumber = jObject.getString("phnumber");
-                    String date = jObject.getString("published_date");
+                    String date = jObject.getString("date");
 
                     contactInfoArrayList.add(new ContactInfo(id, name, phnumber, date));
                     dInfoArrayList.add(new ContactInfo(id, name, phnumber, date));

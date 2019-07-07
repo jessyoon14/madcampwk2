@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.Wk2_project.Fg3_Memo.MemoInfo;
+
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {

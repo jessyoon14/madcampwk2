@@ -36,7 +36,16 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -47,13 +56,14 @@ import retrofit2.Retrofit;
 
 ///https://www.youtube.com/watch?time_continue=114&v=4Xq2FUJvE-c
 public class PreActivity extends AppCompatActivity {
-
+    public static String user_email;
     TextView txt_create_account, displayName, emailID;
     ImageView displayImage;
     MaterialEditText edt_login_email,edt_login_password;
     Button btn_login;
     private String userEmail;
     LoginButton loginButton;
+    String register_email;
     
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     IMyService iMyService;
@@ -151,6 +161,11 @@ public class PreActivity extends AppCompatActivity {
                     public void onSuccess(LoginResult loginResult) {
                         // App code
                         Toast.makeText(PreActivity.this, "Facebook Login successful", Toast.LENGTH_SHORT).show();
+                        //Intent i = new Intent(PreActivity.this, MainActivity.class);
+                        //user_email = emailID.getText().toString();
+
+                        //startActivity(i);
+                        //finish();
                     }
 
                     @Override
@@ -175,6 +190,7 @@ public class PreActivity extends AppCompatActivity {
                 // Retrieving access token using the LoginResult
                 AccessToken accessToken = loginResult.getAccessToken();
                 useLoginInformation(accessToken);
+
             }
 
             @Override
@@ -200,7 +216,7 @@ public class PreActivity extends AppCompatActivity {
 
 
 
-    private void registerUser(String email, String name, String password ){
+    private void registerUser(final String email, String name, String password ){
         compositeDisposable.add(iMyService.registerUser(email, name, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -208,8 +224,13 @@ public class PreActivity extends AppCompatActivity {
                     @Override
                     public void accept(String response) throws Exception {
                         Toast.makeText(PreActivity.this, ""+response, Toast.LENGTH_SHORT).show();
-                        if (response == "Registration success"){
+                        Log.i("before", response);
+                        if (response.equals("\"Registration success\"")){
+                            Log.i("after", response);
                             //make a new DB for this user!!!!!
+                            register_email = email;
+                            new JSONTask6().execute("http://143.248.38.245:7080/api/books");
+
                         }
                     }
 
@@ -233,8 +254,13 @@ public class PreActivity extends AppCompatActivity {
             @Override
             public void accept(String response) throws Exception {
                 Toast.makeText(PreActivity.this, ""+response, Toast.LENGTH_SHORT).show();
-                if (response == "Login success"){
-                    //Move to next activity
+                Log.i("bcd", response);
+                if (response.equals("\"Login success\"")){
+                    Log.i("asd", response);
+                    Intent i = new Intent(PreActivity.this, MainActivity.class);
+                    user_email = edt_login_email.getText().toString();
+                    startActivity(i);
+                    finish();
                 }
             }
 
@@ -259,6 +285,12 @@ public class PreActivity extends AppCompatActivity {
                     emailID.setText(email);
                     userEmail = email;
                     new DownloadImageTask(displayImage).execute(image);
+                    Intent i = new Intent(PreActivity.this, MainActivity.class);
+                    user_email = emailID.getText().toString();
+                    register_email = user_email;
+                    new JSONTask6().execute("http://143.248.38.245:7080/api/books");
+                    startActivity(i);
+                    finish();
                     //displayImage.setImage;
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -298,6 +330,85 @@ public class PreActivity extends AppCompatActivity {
         protected void onPostExecute(Bitmap result) {
             if (result!= null)
                 bmImage.setImageBitmap(result);
+        }
+    }
+    public class JSONTask6 extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String urls[]) {
+            try {
+
+                //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
+                JSONObject jsonObject = new JSONObject();
+
+                jsonObject.accumulate("email", register_email);
+
+                HttpURLConnection con = null;
+                BufferedReader reader = null;
+
+                try{
+                    //URL url = new URL("http://192.168.25.16:3000/users");
+                    URL url = new URL(urls[0]);
+                    //연결을 함
+                    con = (HttpURLConnection) url.openConnection();
+
+                    con.setRequestMethod("POST");//POST방식으로 보냄
+                    con.setRequestProperty("Cache-Control", "no-cache");//캐시 설정
+                    con.setRequestProperty("Content-Type", "application/json");//application JSON 형식으로 전송
+                    con.setRequestProperty("Accept", "text/html");//서버에 response 데이터를 html로 받음
+                    con.setDoOutput(true);//Outstream으로 post 데이터를 넘겨주겠다는 의미
+                    con.setDoInput(true);//Inputstream으로 서버로부터 응답을 받겠다는 의미
+                    con.connect();
+                    //서버로 보내기위해서 스트림 만듬
+                    OutputStream outStream = con.getOutputStream();
+                    //버퍼를 생성하고 넣음
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
+                    writer.write(jsonObject.toString());
+
+
+                    writer.flush();
+                    writer.close();//버퍼를 받아줌
+
+                    //서버로 부터 데이터를 받음
+                    InputStream stream = con.getInputStream();
+
+                    reader = new BufferedReader(new InputStreamReader(stream));
+
+                    StringBuffer buffer = new StringBuffer();
+
+                    String line = "";
+                    while((line = reader.readLine()) != null){
+                        buffer.append(line);
+                    }
+
+                    return buffer.toString();//서버로 부터 받은 값을 리턴해줌 아마 OK!!가 들어올것임
+
+                } catch (MalformedURLException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if(con != null){
+                        con.disconnect();
+                    }
+                    try {
+                        if(reader != null){
+                            reader.close();//버퍼를 닫아줌
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
         }
     }
 

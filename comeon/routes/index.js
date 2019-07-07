@@ -55,7 +55,7 @@ module.exports = function(app, Book)
             if(!book) return res.status(404).json({ error: 'book not found' });
     
             if(req.body.name) book.name = req.body.name;
-            if(req.body.phnumber) book.phnumber = req.body.phnu;
+            if(req.body.phnumber) book.phnumber = req.body.phnumber;
             if(req.body.published_date) book.published_date = req.body.published_date;
     
             book.save(function(err){

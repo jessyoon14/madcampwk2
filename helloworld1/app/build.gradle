@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.github.javiersantos:MaterialStyledDialogs:2.1'
 
     //Facebook sdk
-    implementation 'com.facebook.android:facebook-login:[5,6)'
+    //implementation 'com.facebook.android:facebook-login:[5,6)'
+    implementation 'com.facebook.android:facebook-android-sdk:5.0.0'
 
 }
