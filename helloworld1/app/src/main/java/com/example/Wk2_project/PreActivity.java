@@ -229,7 +229,7 @@ public class PreActivity extends AppCompatActivity {
                             Log.i("after", response);
                             //make a new DB for this user!!!!!
                             register_email = email;
-                            new JSONTask6().execute("http://143.248.38.245:7080/api/books");
+                            new JSONTask6().execute("http://143.248.36.28:7080/api/books");
 
                         }
                     }
@@ -288,7 +288,7 @@ public class PreActivity extends AppCompatActivity {
                     Intent i = new Intent(PreActivity.this, MainActivity.class);
                     user_email = emailID.getText().toString();
                     register_email = user_email;
-                    new JSONTask6().execute("http://143.248.38.245:7080/api/books");
+                    new JSONTask6().execute("http://143.248.36.28:7080/api/books");
                     startActivity(i);
                     finish();
                     //displayImage.setImage;

@@ -1,11 +1,14 @@
 package com.example.Wk2_project;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,102 +20,267 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.Wk2_project.Fg2_gallary.FullImageActivity;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.File;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A placeholder fragment containing a simple view.
  */
-
 public class Fragment2 extends Fragment {
-    View view;
-
-    private static final int REQUEST_TAKE_PHOTO = 2222;
-    private static final int REQUEST_TAKE_ALBUM = 3333;
-    private static final int REQUEST_IMAGE_CROP = 4444;
-
-    Button btn_capture, btn_album;
-    ImageView iv_view;
-
-    String mCurrentPhotoPath;
-
-    Uri imageUri;
-    Uri photoURI, albumURI;
-    ImageAdapter imageAdapter;
     private ArrayList<String> images;
+    private ArrayList<String> files = new ArrayList<>();
+    Button button1;
+    GridView gallery;
+    JSONArray jarray = new JSONArray();
+    private static final int GALLERY_REQUEST_CODE = 10;
+    private View view;
+    Uri uri;
 
 
-    @Nullable
+    public Fragment2() {
+    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_fragment2, container, false);
-//        btn_capture = (Button) view.findViewById(R.id.btn_capture);
-       // btn_album = (Button) view.findViewById(R.id.btn_album);
-        iv_view = (ImageView) view.findViewById(R.id.iv_view);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        onAttach(getContext());
+    }
 
-        //--------Grid View 로 이미 setting 된 image 보여주기----------------
-        GridView gridView = (GridView) view.findViewById(R.id.grid_view);
-        imageAdapter = new ImageAdapter(getActivity());
-        gridView.setAdapter(imageAdapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate (R.layout.fragment_fragment2, container, false);
+        // Inflate the layout for this fragment
+        button1 = view.findViewById(R.id.button);
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-
-                // Sending image id to FullScreenActivity
-                Intent i = new Intent(getActivity(), FullImageActivity.class);
-                // passing array index
-                i.putExtra("path", images.get(position));
-                startActivity(i);
+            public void onClick(View view) {
+                pickFromGallery();
             }
         });
-
-
-        //--------------------------------------------------------------------
-
-
-//        //-----------------album 에서 사진 갖고오는 method call---------------
-//        btn_album.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getAlbum();
-//            }
-//        });
-//        //--------------------------------------------------------------------
-
-        //grid view + button 보이고, 그 이전에 checkPermission
+        //get json-list of all images in server
+        new JSONTask().execute("http://143.248.36.28:5000/files");
+        gallery = (GridView) view.findViewById(R.id.galleryGridView);
 
         return view;
     }
 
-    public class ImageAdapter extends BaseAdapter {
-        private Activity mContext;
-        private Uri myUri;
+    private void pickFromGallery(){
+        //Create an Intent with action as ACTION_PICK
+        Intent intent=new Intent(Intent.ACTION_PICK);
+        // Sets the type as image/*. This ensures only components of type image are selected
+        intent.setType("image/*");
+        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+        String[] mimeTypes = {"image/jpeg", "image/png"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+        // Launching the Intent
+        startActivityForResult(intent,GALLERY_REQUEST_CODE);
 
-        // Keep all Images in array
-//    public Integer[] mThumbIds = {
-//            R.drawable.pic_1, R.drawable.pic_2,
-//            R.drawable.pic_3, R.drawable.pic_4,
-//            R.drawable.pic_5, R.drawable.pic_6
-//    };
+    }
 
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+        // Result code is RESULT_OK only if the user selects an Image
+        if (resultCode == Activity.RESULT_OK)
+            switch (requestCode){
+                case GALLERY_REQUEST_CODE:
+                    //data.getData returns the content URI for the selected Image
+                    Uri selectedImage = data.getData();
+                    uri = selectedImage;
+                    new UploadFile().execute(selectedImage);
+//                    try {
+//                        //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), selectedImage);
+//                        new UploadFile();
+//
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+                    break;
+            }
+    }
 
+    public void showImages(){
+        gallery.setAdapter(new ImageAdapter((Activity) requireActivity()));
+        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1,
+                                    int position, long arg3) {
+                if (null != images && !images.isEmpty())
+                    Toast.makeText(
+                            getContext(),
+                            "position " + position + " " + images.get(position),
+                            Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof Activity){
+            Activity mActivity =(Activity) context;
+        }
+    }
+
+    public class JSONTask extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
+
+                HttpURLConnection con = null;
+                BufferedReader reader = null;
+
+                try{
+                    //URL url = new URL("http://192.168.25.16:3000/users");
+                    URL url = new URL(urls[0]);//url을 가져온다.
+                    con = (HttpURLConnection) url.openConnection();
+                    con.connect();//연결 수행
+
+                    //입력 스트림 생성
+                    InputStream stream = con.getInputStream();
+
+                    //속도를 향상시키고 부하를 줄이기 위한 버퍼를 선언한다.
+                    reader = new BufferedReader(new InputStreamReader(stream));
+
+                    //실제 데이터를 받는곳
+                    StringBuffer buffer = new StringBuffer();
+
+                    //line별 스트링을 받기 위한 temp 변수
+                    String line = "";
+
+                    //아래라인은 실제 reader에서 데이터를 가져오는 부분이다. 즉 node.js서버로부터 데이터를 가져온다.
+                    while((line = reader.readLine()) != null){
+                        buffer.append(line);
+                    }
+
+                    //다 가져오면 String 형변환을 수행한다. 이유는 protected String doInBackground(String... urls) 니까
+                    return buffer.toString();
+
+                    //아래는 예외처리 부분이다.
+                } catch (MalformedURLException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    //종료가 되면 disconnect메소드를 호출한다.
+                    if(con != null){
+                        con.disconnect();
+                    }
+                    try {
+                        //버퍼를 닫아준다.
+                        if(reader != null){
+                            reader.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }//finally 부분
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        //doInBackground메소드가 끝나면 여기로 와서 텍스트뷰의 값을 바꿔준다.
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d("My tag", result);
+            try {
+                jarray = new JSONArray(result);   // JSONArray 생성
+                for(int i=0; i < jarray.length(); i++){
+                    JSONObject jObject = jarray.getJSONObject(i);  // JSONObject 추출
+                    String name = jObject.getString("filename");
+                    files.add(name);
+                    //later add something more
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.d("tag", files.toString());
+
+            showImages();
+        }
+
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Bitmap, Bitmap> {
+        public DownloadImageTask(ImageView bmImage1) {
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+//            gallery.setAdapter(new ImageAdapter((Activity) requireActivity()));
+//            gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//                @Override
+//                public void onItemClick(AdapterView<?> arg0, View arg1,
+//                                        int position, long arg3) {
+//                    if (null != images && !images.isEmpty())
+//                        Toast.makeText(
+//                                getContext(),
+//                                "position " + position + " " + images.get(position),
+//                                Toast.LENGTH_SHORT).show();
+//
+//
+//                }
+//            });
+//            if (result!= null)
+//                return result;
+        }
+    }
+
+    private class ImageAdapter extends BaseAdapter {
+
+        /** The context. */
+        private Activity context;
+
+        /**
+         * Instantiates a new image adapter.
+         *
+         * @param localContext
+         *            the local context
+         */
         public ImageAdapter(Activity localContext) {
-            mContext = localContext;
-            images = getAllShownImagesPath(mContext);
+            context = localContext;
+            images = files;
         }
 
         public int getCount() {
@@ -130,9 +298,8 @@ public class Fragment2 extends Fragment {
         public View getView(final int position, View convertView,
                             ViewGroup parent) {
             ImageView picturesView;
-
             if (convertView == null) {
-                picturesView = new ImageView(mContext);
+                picturesView = new ImageView(context);
                 picturesView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 picturesView
                         .setLayoutParams(new GridView.LayoutParams(270, 270));
@@ -141,193 +308,119 @@ public class Fragment2 extends Fragment {
                 picturesView = (ImageView) convertView;
             }
 
-            Glide.with(mContext).load(images.get(position)).centerCrop()
+
+            //String filename = images.get(0);
+            //images.remove(0);
+            Glide.with(context).load("http://143.248.36.28:5000/files/" + images.get(position))
+                    .placeholder(R.drawable.ic_launcher_background).centerCrop()
                     .into(picturesView);
-
-
-
+//
+//            if (images.size() >0 ) {
+//                String filename = images.get(0);
+//                images.remove(0);
+//                Glide.with(context).load("http://143.248.36.28:5000/files/" + filename)
+//                        .placeholder(R.drawable.ic_launcher_background).centerCrop()
+//                        .into(picturesView);
+//            }
+//            Glide.with(context).load("http://143.248.36.28:5000/files/nandroid.jpg.jpg")//load(images.get(position))
+//                    .placeholder(R.drawable.ic_launcher_background).centerCrop()
+//                    .into(picturesView);
 
             return picturesView;
         }
-
-        /**
-         * Getting All Images Path.
-         *
-         * @param activity
-         *            the activity
-         * @return ArrayList with images Path
-         */
-        private ArrayList<String> getAllShownImagesPath(Activity activity) {
-            Uri uri;
-            Cursor cursor;
-            int column_index_data, column_index_folder_name;
-            ArrayList<String> listOfAllImages = new ArrayList<String>();
-            String absolutePathOfImage = null;
-            uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-
-            String[] projection = { MediaStore.MediaColumns.DATA,
-                    MediaStore.Images.Media.BUCKET_DISPLAY_NAME };
-
-            cursor = activity.getContentResolver().query(uri, projection, null,
-                    null, null);
-
-            column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-            column_index_folder_name = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
-            while (cursor.moveToNext()) {
-                absolutePathOfImage = cursor.getString(column_index_data);
-
-                listOfAllImages.add(absolutePathOfImage);
-            }
-
-            Collections.reverse(listOfAllImages);
-            return listOfAllImages;
-        }
-
     }
-    //촬영한 사진 갖고오는 method. 사용하지 않을 것.
-    private void captureCamera(){
-        String state = Environment.getExternalStorageState();
-        // 외장 메모리 검사
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                File photoFile = null;
-                try {
-                    photoFile = createImageFile();
-                } catch (IOException ex) {
-                    Log.e("captureCamera Error", ex.toString());
+    public class UploadFile extends AsyncTask<Uri, String, String> {
+        String file_name = "file";
+        Uri uri;
+        @Override
+        protected String doInBackground(Uri[] params) {
+            try {
+                uri = params[0];
+                String lineEnd = "\r\n";
+                String twoHyphens = "--";
+                String boundary = "*****";
+                int bytesRead, bytesAvailable, bufferSize;
+                byte[] buffer;
+                int maxBufferSize = 1024 * 1024;
+                //todo change URL as per client ( MOST IMPORTANT )
+                URL url = new URL("http://143.248.36.28:5000/upload");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+                // Allow Inputs &amp; Outputs.
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                connection.setUseCaches(false);
+
+                // Set HTTP method to POST.
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Connection", "Keep-Alive");
+                connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                FileInputStream fileInputStream;
+                DataOutputStream outputStream;
+                outputStream = new DataOutputStream(connection.getOutputStream());
+                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+
+//                outputStream.writeBytes("Content-Disposition: form-data; name=\"file\""+ lineEnd);//("Content-Disposition: form-data; name=\"reference\""+ lineEnd);
+//                outputStream.writeBytes(lineEnd);
+//                outputStream.writeBytes("my_refrence_text");
+//                outputStream.writeBytes(lineEnd);
+//                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+
+                outputStream.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\"" + uri.getLastPathSegment() +"\"" + lineEnd);//used to be name=\"uploadFile\"
+
+                outputStream.writeBytes(lineEnd);
+
+                String[] proj = {MediaStore.Images.Media.DATA};
+
+                Cursor cursor = getContext().getContentResolver().query(uri, proj, null, null, null);
+                cursor.moveToNext();
+                String path = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
+
+                fileInputStream = new FileInputStream(path);//(uri.getPath());
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                buffer = new byte[bufferSize];
+
+                // Read file
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                while (bytesRead > 0) {
+                    outputStream.write(buffer, 0, bufferSize);
+                    bytesAvailable = fileInputStream.available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
                 }
-                if (photoFile != null) {
-                    // getUriForFile의 두 번째 인자는 Manifest provier의 authorites와 일치해야 함
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
-                    Uri providerURI = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName(), photoFile);
-                    imageUri = providerURI;
-
-                    // 인텐트에 전달할 때는 FileProvier의 Return값인 content://로만!!, providerURI의 값에 카메라 데이터를 넣어 보냄
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, providerURI);
-
-                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-                }
-            }
-        } else {
-            Toast.makeText(getActivity(), "저장공간이 접근 불가능한 기기입니다", Toast.LENGTH_SHORT).show();
-            return;
-        }
-    }
-
-    //
-    public File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + ".jpg";
-        File imageFile = null;
-        File storageDir = new File(Environment.getExternalStorageDirectory() + "/Pictures", "gyeom");
-
-        if (!storageDir.exists()) {
-            Log.i("mCurrentPhotoPath1", storageDir.toString());
-            storageDir.mkdirs();
-        }
-
-        imageFile = new File(storageDir, imageFileName);
-        mCurrentPhotoPath = imageFile.getAbsolutePath();
-
-        return imageFile;
-    }
-
-    //앨범에서 사진 갖고오기. PICK
-    private void getAlbum(){
-        Log.i("getAlbum", "Call");
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-        startActivityForResult(intent, REQUEST_TAKE_ALBUM);
-    }
-
-    private void galleryAddPic(){
-        Log.i("galleryAddPic", "Call");
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        // 해당 경로에 있는 파일을 객체화(새로 파일을 만든다는 것으로 이해하면 안 됨)
-        File f = new File(mCurrentPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        getActivity().sendBroadcast(mediaScanIntent);
-        Toast.makeText(getActivity(), "사진이 앨범에 저장되었습니다.", Toast.LENGTH_SHORT).show();
-    }
-
-    // 카메라 전용 크랍
-    public void cropImage(){
-        Log.i("cropImage", "Call");
-        Log.i("cropImage", "photoURI : " + photoURI + " / albumURI : " + albumURI);
-
-        Intent cropIntent = new Intent("com.android.camera.action.CROP");
-
-        // 50x50픽셀미만은 편집할 수 없다는 문구 처리 + 갤러리, 포토 둘다 호환하는 방법
-        cropIntent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        cropIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        cropIntent.setDataAndType(photoURI, "image/*");
-        //cropIntent.putExtra("outputX", 200); // crop한 이미지의 x축 크기, 결과물의 크기
-        //cropIntent.putExtra("outputY", 200); // crop한 이미지의 y축 크기
-        cropIntent.putExtra("aspectX", 1); // crop 박스의 x축 비율, 1&1이면 정사각형
-        cropIntent.putExtra("aspectY", 1); // crop 박스의 y축 비율
-        cropIntent.putExtra("scale", true);
-        cropIntent.putExtra("output", albumURI); // 크랍된 이미지를 해당 경로에 저장
-        startActivityForResult(cropIntent, REQUEST_IMAGE_CROP);
-    }
-
-    //get album 의  startActivityForResult(intent, REQUEST_TAKE_ALBUM); 로부터 시작.
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-//            case REQUEST_TAKE_PHOTO:
-//                if (resultCode == Activity.RESULT_OK) {
-//                    try {
-//                        Log.i("REQUEST_TAKE_PHOTO", "OK");
-//                        galleryAddPic();
-//
-//                        iv_view.setImageURI(imageUri);
-//                    } catch (Exception e) {
-//                        Log.e("REQUEST_TAKE_PHOTO", e.toString());
-//                    }
-//                } else {
-//                    Toast.makeText(getActivity(), "사진찍기를 취소하였습니다.", Toast.LENGTH_SHORT).show();
-//                }
-//                break;
-
-            case REQUEST_TAKE_ALBUM:
-                if (resultCode == Activity.RESULT_OK) {
-
-                    if(data.getData() != null){
-                        try {
-                            File albumFile = null;
-                            albumFile = createImageFile();
-                            photoURI = data.getData();
-                            albumURI = Uri.fromFile(albumFile);
-                            cropImage();
-                        }catch (Exception e){
-                            Log.e("TAKE_ALBUM_SINGLE ERROR", e.toString());
-                        }
+                // Responses from the server (code and message)
+                int serverResponseCode = connection.getResponseCode();
+                String result = null;
+                if (serverResponseCode == 200) {
+                    StringBuilder s_buffer = new StringBuilder();
+                    InputStream is = new BufferedInputStream(connection.getInputStream());
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                    String inputLine;
+                    while ((inputLine = br.readLine()) != null) {
+                        s_buffer.append(inputLine);
                     }
+                    result = s_buffer.toString();
                 }
-                break;
-
-            case REQUEST_IMAGE_CROP:
-                if (resultCode == Activity.RESULT_OK) {
-                    galleryAddPic();
-
-
-
-////                    gridView.setAdapter(new ImageAdapter(getActivity()));
-//
-//                    startActivity(intent); // Image Adapter 로 전달
-
-//                    getActivity().startActivity(intent);
-                   // iv_view.setImageURI(albumURI);
+                fileInputStream.close();
+                outputStream.flush();
+                outputStream.close();
+                if (result != null) {
+                    Log.d("result_for upload", result);
+                    //file_name = getDataFromInputStream(result, "file_name");
                 }
-                break;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return file_name;
+        }
+        protected void onPostExecute(String result) {
+            getActivity().recreate();
         }
     }
-
-
 }

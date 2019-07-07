@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.Wk2_project.ui.main.SectionsPagerAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -27,10 +28,11 @@ public class MainActivity extends AppCompatActivity {
 
     String[] permissions= new String[]{
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_CONTACTS
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_CONTACTS
+
     };
-
-
 
     private  boolean checkPermissions() {
         int result;
@@ -44,16 +46,19 @@ public class MainActivity extends AppCompatActivity {
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),MULTIPLE_PERMISSIONS );
             return false;
-        }else{
-            ViewPager viewPager = findViewById(R.id.view_pager);
-            SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-            viewPager.setAdapter(sectionsPagerAdapter);
-            TabLayout tabs = findViewById(R.id.tabs);
-            tabs.setupWithViewPager(viewPager);
         }
+
+
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(sectionsPagerAdapter);
+
+
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
+        FloatingActionButton fab = findViewById(R.id.fab);
         return true;
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissionsList[], int[] grantResults) {
@@ -61,31 +66,84 @@ public class MainActivity extends AppCompatActivity {
             case MULTIPLE_PERMISSIONS:{
                 if (grantResults.length > 0) {
                     String permissionsDenied = "";
-                    int cnt = 0;
                     for (String per : permissionsList) {
                         if(grantResults[0] == PackageManager.PERMISSION_DENIED){
                             permissionsDenied += "\n" + per;
-                        }else{
-                            cnt ++;
-                        }
-                    }
 
-                    if(cnt == 2){
-                        ViewPager viewPager = findViewById(R.id.view_pager);
-                        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-                        viewPager.setAdapter(sectionsPagerAdapter);
-                        TabLayout tabs = findViewById(R.id.tabs);
-                        tabs.setupWithViewPager(viewPager);
-//                        return;
+                        }
+
                     }
                     // Show permissionsDenied
-                    break;
-//                       updateViews();
+                    //updateViews();
                 }
+
+                SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+                ViewPager viewPager = findViewById(R.id.view_pager);
+                viewPager.setAdapter(sectionsPagerAdapter);
+
+
+                TabLayout tabs = findViewById(R.id.tabs);
+                tabs.setupWithViewPager(viewPager);
+                FloatingActionButton fab = findViewById(R.id.fab);
                 return;
             }
         }
     }
+
+//    private  boolean checkPermissions() {
+//        int result;
+//        List<String> listPermissionsNeeded = new ArrayList<>();
+//        for (String p:permissions) {
+//            result = ContextCompat.checkSelfPermission(this,p);
+//            if (result != PackageManager.PERMISSION_GRANTED) {
+//                listPermissionsNeeded.add(p);
+//            }
+//        }
+//        if (!listPermissionsNeeded.isEmpty()) {
+//            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),MULTIPLE_PERMISSIONS );
+//            return false;
+//        }else{
+//            ViewPager viewPager = findViewById(R.id.view_pager);
+//            SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+//            viewPager.setAdapter(sectionsPagerAdapter);
+//            TabLayout tabs = findViewById(R.id.tabs);
+//            tabs.setupWithViewPager(viewPager);
+//        }
+//        return true;
+//    }
+//
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissionsList[], int[] grantResults) {
+//        switch (requestCode) {
+//            case MULTIPLE_PERMISSIONS:{
+//                if (grantResults.length > 0) {
+//                    String permissionsDenied = "";
+//                    int cnt = 0;
+//                    for (String per : permissionsList) {
+//                        if(grantResults[0] == PackageManager.PERMISSION_DENIED){
+//                            permissionsDenied += "\n" + per;
+//                        }else{
+//                            cnt ++;
+//                        }
+//                    }
+//
+//                    if(cnt == 4){
+//                        ViewPager viewPager = findViewById(R.id.view_pager);
+//                        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+//                        viewPager.setAdapter(sectionsPagerAdapter);
+//                        TabLayout tabs = findViewById(R.id.tabs);
+//                        tabs.setupWithViewPager(viewPager);
+////                        return;
+//                    }
+//                    // Show permissionsDenied
+//                    break;
+////                       updateViews();
+//                }
+//                return;
+//            }
+//        }
+//    }
 
 //    Fragment1 frag1;
 //    Fragment2 frag2;
