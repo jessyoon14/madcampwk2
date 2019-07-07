@@ -10,23 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5178527-b5d3-46d7-acb8-664f4b783b14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/res/menu/main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gazua/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../gazua/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/ContactaddActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/ContactaddActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/subactivity_contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fg1_Contact/subactivity_contact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/PreActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Wk2_project/PreActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../wed7pm/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../wed7pm/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../wed7pm/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../wed7pm/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../wed7pm/app/src/main/res/layout/activity_pre.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../wed7pm/app/src/main/res/layout/activity_pre.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../wed7pm/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../wed7pm/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,16 +31,16 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment3.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="399">
-              <caret line="47" column="67" lean-forward="true" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
+              <caret line="47" column="67" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment2.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-304">
-              <caret line="56" column="13" lean-forward="true" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+              <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -64,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="111" column="21" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="21" />
+            <state relative-caret-position="161">
+              <caret line="111" column="21" lean-forward="true" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -89,13 +73,15 @@
           <provider editor-type-id="android-manifest" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1035">
-              <caret line="183" selection-start-line="183" selection-end-line="183" />
+            <state relative-caret-position="318">
+              <caret line="271" column="41" lean-forward="true" selection-start-line="271" selection-start-column="16" selection-end-line="271" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#9946#10104#0" expanded="true" />
+                <element signature="e#10103#10104#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/PreActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
+            <state relative-caret-position="226">
+              <caret line="219" column="42" selection-start-line="219" selection-start-column="32" selection-end-line="219" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#10995#11604#0" expanded="true" />
@@ -116,10 +102,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.android/facebook-common/5.0.0/52de5072994f214f4ea83741fdad44c6ea9d46c0/facebook-common-5.0.0-sources.jar!/com/facebook/FacebookCallback.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Retrofit/IMyService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="20" selection-start-line="20" selection-end-line="20" selection-end-column="20" />
+            <state relative-caret-position="266">
+              <caret line="17" selection-start-line="14" selection-start-column="19" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Retrofit/RetrofitClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="24" column="31" lean-forward="true" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -131,12 +126,6 @@
               <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
             </state>
           </provider>
-          <provider selected="true" editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_memo.xml">
-          <provider editor-type-id="text-editor" />
           <provider selected="true" editor-type-id="android-designer2" />
         </entry>
       </file>
@@ -170,6 +159,7 @@
       <find>emailID</find>
       <find>loginmanager</find>
       <find>useLoginInformation</find>
+      <find>imyservice</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -271,6 +261,13 @@
               <item name="Wk2_project" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="Fg2_gallary" type="462c0819:PsiDirectoryNode" />
               <item name="FullImageActivity" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="helloworld1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="Wk2_project" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="Retrofit" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="helloworld1" type="1abcf292:AndroidViewProjectNode" />
@@ -489,24 +486,10 @@
     <entry file="file://$PROJECT_DIR$/../settings.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Retrofit/IMyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="17" selection-start-line="14" selection-start-column="19" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Retrofit/RetrofitClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -736,16 +719,6 @@
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="183" selection-start-line="183" selection-end-line="183" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/menu/main.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -753,13 +726,6 @@
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="111" column="21" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="21" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -776,10 +742,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="47" column="67" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-304">
+          <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/PreActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
+        <state relative-caret-position="226">
+          <caret line="219" column="42" selection-start-line="219" selection-start-column="32" selection-end-line="219" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#10995#11604#0" expanded="true" />
@@ -788,17 +768,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment3.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Retrofit/IMyService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="47" column="67" lean-forward="true" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
+        <state relative-caret-position="266">
+          <caret line="17" selection-start-line="14" selection-start-column="19" selection-end-line="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment2.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Retrofit/RetrofitClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-304">
-          <caret line="56" column="13" lean-forward="true" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+        <state relative-caret-position="418">
+          <caret line="24" column="31" lean-forward="true" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="111" column="21" lean-forward="true" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/Wk2_project/Fragment1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="271" column="41" lean-forward="true" selection-start-line="271" selection-start-column="16" selection-end-line="271" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9946#10104#0" expanded="true" />
+            <element signature="e#10103#10104#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
