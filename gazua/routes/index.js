@@ -1,6 +1,6 @@
 // routes/index.js
 
-module.exports = function(app, Book, Personalc)
+module.exports = function(app, Book, Personalc, Schedule)
 {
     // GET ALL BOOKS
     app.get('/api/books', function(req,res){
@@ -18,6 +18,14 @@ module.exports = function(app, Book, Personalc)
             res.json(book);
         })
     });
+    //// GET PERSONAL SCHEDULES
+    //app.get('/api/books/schedule/:email', function(req,res){
+    //    Book.findOne({email: req.params.email}, function(err, book){
+    //        if(err) return res.status(500).send({error: 'database failure'});
+    //        if(!book) return res.status(404).json({error: 'book not found'});
+    //        res.json(book);
+    //    })
+    //});
 
     // GET SINGLE contact
     //app.get('/api/books/:email', function(req, res){
@@ -44,6 +52,7 @@ module.exports = function(app, Book, Personalc)
         book.email = req.body.email;
         book.contact_list = [];
         book.image_list = [];
+        book.schedule_list = [];
         
         console.log("book title : "+book.email );
 
@@ -67,6 +76,30 @@ module.exports = function(app, Book, Personalc)
             personalc.phnumber = req.body.phnumber;
             personalc.date = req.body.date;
             book.contact_list.push(personalc);
+            //res.json(book);
+        
+
+            book.save(function(err){
+                if(err){
+                    console.error(err);
+                    res.json({result: 0});
+                    return;
+                }    
+                res.json({result: 1});    
+            });
+        });
+    });
+
+    //post new schedule one certain day
+    app.post('/api/books/schedule/:email', function(req, res){
+        Book.findOne({email: req.params.email}, function(err, book){
+            if(err) return res.status(500).json({error: err});
+            if(!book) return res.status(404).json({error: 'book not found'});
+            var schedulec = new Schedule();
+            schedulec.date = req.body.date;
+            schedulec.schedule = req.body.schedule;
+            
+            book.schedule_list.push(schedulec);
             //res.json(book);
         
 
