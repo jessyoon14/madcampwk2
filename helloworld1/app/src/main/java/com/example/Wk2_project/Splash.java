@@ -1,11 +1,9 @@
-package com.example.Wk2_project.ui.main;
+package com.example.Wk2_project;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-
-import com.example.Wk2_project.R;
 
 //Splash page tutorial : https://yoo-hyeok.tistory.com/31
 public class Splash extends Activity {
@@ -23,7 +21,7 @@ public class Splash extends Activity {
 
     private class splashhandler implements Runnable{
         public void run(){
-            startActivity(new Intent(getApplication(), MainPage.class)); //로딩이 끝난 후, ChoiceFunction 이동
+            startActivity(new Intent(getApplication(), PreActivity.class)); //로딩이 끝난 후, ChoiceFunction 이동
             Splash.this.finish(); // 로딩페이지 Activity stack에서 제거
         }
     }

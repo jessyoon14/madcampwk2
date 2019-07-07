@@ -20,6 +20,8 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//Color theme : https://www.colorcombos.com/color-scheme-124.html
 public class MainActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static final int MY_PERMISSION_CAMERA = 1111;
