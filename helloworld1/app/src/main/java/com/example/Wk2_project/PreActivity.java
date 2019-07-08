@@ -55,7 +55,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 //import static com.example.Wk2_project.Fragment2.profilepic;
-
+//commit test
 ///https://www.youtube.com/watch?time_continue=114&v=4Xq2FUJvE-c
 public class PreActivity extends AppCompatActivity {
     public static String user_email;
