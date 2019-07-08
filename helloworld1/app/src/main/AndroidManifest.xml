@@ -13,8 +13,6 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
     <application
-        android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,20 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity
-            android:name=".Splash"
-            android:theme="@style/AppTheme.Launcher"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".PreActivity"
-            android:theme="@style/AppTheme.Launcher">
+        <activity android:name=".PreActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
-
         </activity>
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"
@@ -64,7 +54,7 @@
 
         <activity android:name="com.example.Wk2_project.subActivity1">
         </activity>
-        <activity android:name="com.example.Wk2_project.Fg1_Contact.subactivity_contact">
+        <activity android:name="com.example.Wk2_project.Fg1_Contact.subactivity_contact" android:theme="@android:style/Theme.Dialog">
         </activity>
 
 

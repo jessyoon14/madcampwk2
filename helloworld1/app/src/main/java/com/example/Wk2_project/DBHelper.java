@@ -92,7 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM MONEYBOOK", null);
         while (cursor.moveToNext()) {
             if( item.compareTo(cursor.getString(2)) == 0) {
-                MemoInfoArrayList.add(new MemoInfo(cursor.getInt(0), cursor.getString(2),cursor.getString(1)));
+                MemoInfoArrayList.add(new MemoInfo(cursor.getString(0), cursor.getString(2),cursor.getString(1)));
                 result += cursor.getString(0)
                         + " : "
                         + cursor.getString(1)
