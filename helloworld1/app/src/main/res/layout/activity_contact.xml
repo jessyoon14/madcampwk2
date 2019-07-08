@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
     android:id="@+id/activity_contact">
 
     <ImageView
@@ -17,6 +19,7 @@
         android:id="@+id/co_name"
         android:layout_width="match_parent"
         android:layout_height="90dp"
+        android:textColor="#fff"
         android:gravity="center"
         android:textSize="30sp" />
 
@@ -24,15 +27,9 @@
         android:id="@+id/co_phone"
         android:layout_width="match_parent"
         android:layout_height="90dp"
+        android:textColor="#fff"
         android:gravity="center"
         android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/backward"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:onClick="onClick_exit"
-        android:text="뒤로가기" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,21 +38,25 @@
 
         <Button
             android:id="@+id/bt_deletecontact"
-            android:layout_width="167dp"
+            android:layout_width="150dp"
+            android:background="#00000000"
             android:layout_height="wrap_content"
             android:text="Delete" />
 
         <Button
             android:id="@+id/bt_modifycontact"
-            android:layout_width="167dp"
+            android:layout_width="150dp"
+            android:background="#00000000"
             android:layout_height="wrap_content"
             android:text="Modify" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/bt_img"
+        android:id="@+id/backward"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="사진 수정" />
+        android:layout_height="75dp"
+        android:background="#00000000"
+        android:onClick="onClick_exit"
+        android:text="뒤로가기" />
 
 </LinearLayout>

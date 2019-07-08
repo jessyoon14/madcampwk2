@@ -14,6 +14,7 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -53,7 +54,6 @@ public class subactivity_contact extends Activity {
         Button moimage;
         TextView coName;
         TextView coPhone;
-        moimage = findViewById(R.id.bt_img);
         coDelete = findViewById(R.id.bt_deletecontact);
         coModify = findViewById(R.id.bt_modifycontact);
         coName = (TextView)findViewById(R.id.co_name);
@@ -89,6 +89,7 @@ public class subactivity_contact extends Activity {
 //        Glide.with(this).load(coImage)
 //                .error(R.drawable.pic_1)
 //                .into(coImage);
+        /*
         moimage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -98,7 +99,7 @@ public class subactivity_contact extends Activity {
                 startActivityForResult(photoPickerIntent, 10);
             }
         });
-
+*/
         coPhone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -412,6 +413,21 @@ public class subactivity_contact extends Activity {
 
         }
 
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //바깥레이어 클릭시 안닫히게
+        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //안드로이드 백버튼 막기
+        return;
     }
 
     public void onClick_exit(View view) {

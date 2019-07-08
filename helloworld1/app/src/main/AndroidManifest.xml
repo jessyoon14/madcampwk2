@@ -54,7 +54,7 @@
 
         <activity android:name="com.example.Wk2_project.subActivity1">
         </activity>
-        <activity android:name="com.example.Wk2_project.Fg1_Contact.subactivity_contact">
+        <activity android:name="com.example.Wk2_project.Fg1_Contact.subactivity_contact" android:theme="@android:style/Theme.Dialog">
         </activity>
 
 
