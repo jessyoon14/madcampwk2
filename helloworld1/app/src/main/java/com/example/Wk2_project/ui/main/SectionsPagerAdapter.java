@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.Wk2_project.Fragment4;
 import com.example.Wk2_project.R;
 import com.example.Wk2_project.Fragment1;
 import com.example.Wk2_project.Fragment2;
@@ -21,7 +22,7 @@ import com.example.Wk2_project.Fragment3;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3, R.string.tab_text_4 };
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -41,6 +42,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return new Fragment2();
             case 2:
                 return new Fragment3();
+            case 3:
+                return new Fragment4();
             default:
                 return null;
         }
@@ -55,6 +58,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show 2 total pages.
-        return 3;
+        return 4;
     }
 }

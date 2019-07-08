@@ -20,18 +20,38 @@
         android:layout_weight="0" />
 
 
-    <TextView
-        android:id="@+id/date_text"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="0"
-        android:text="TextView"
-        android:textColor="#000000"
-        android:textFontWeight="50"
-        android:textSize="18dp" />
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="0"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textFontWeight="50"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_marginEnd="2dp"
+            android:src="@drawable/round_add_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <!--<ScrollView-->
@@ -49,15 +69,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_memo"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:layout_weight="0" />
+        android:layout_height="match_parent"
+        android:layout_weight="0" >
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/round_add_24" />
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

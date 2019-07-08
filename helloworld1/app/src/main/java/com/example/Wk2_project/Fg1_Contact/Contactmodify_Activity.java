@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Wk2_project.Fg1_Contact.ContactInfo;
+import com.example.Wk2_project.PreActivity;
 import com.example.Wk2_project.R;
 
 import org.json.JSONObject;
@@ -34,6 +35,8 @@ public class Contactmodify_Activity extends AppCompatActivity {
     String mname;
     String mphnumber;
     String mdate;
+    String email = PreActivity.user_email;
+    String id;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactmodify);
@@ -42,7 +45,7 @@ public class Contactmodify_Activity extends AppCompatActivity {
         // Selected image id
         final String Name = i.getExtras().getString("name");
         final String Ph_number = i.getExtras().getString("ph_num");
-        final String id = i.getExtras().getString("id");
+        id = i.getExtras().getString("id");
         final String photo_id = i.getExtras().getString("image_id");
 
         Button btn2 = findViewById(R.id.mo_button);
@@ -62,7 +65,7 @@ public class Contactmodify_Activity extends AppCompatActivity {
                 mname = name.getText().toString();
                 mphnumber = phnumber.getText().toString();
                 mdate = date.getText().toString();
-                new JSONTask3().execute("http://143.248.38.245:8080/api/books/"+id);
+                new JSONTask3().execute("http://143.248.38.245:7080/api/books/email/"+email);
 
             }
         });
@@ -76,10 +79,10 @@ public class Contactmodify_Activity extends AppCompatActivity {
 
                 //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
                 JSONObject jsonObject = new JSONObject();
-
+                jsonObject.accumulate("id", id);
                 jsonObject.accumulate("name", mname);
                 jsonObject.accumulate("phnumber", mphnumber);
-                jsonObject.accumulate("published_date", mdate);
+                jsonObject.accumulate("date", mdate);
                 HttpURLConnection con = null;
                 BufferedReader reader = null;
 

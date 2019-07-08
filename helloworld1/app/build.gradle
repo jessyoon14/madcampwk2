@@ -59,4 +59,9 @@ dependencies {
     //Glide library for iamge processing
     compile 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    //Round Image
+    implementation 'com.mikhaellopez:circularimageview:4.0.1'
+
+
 }

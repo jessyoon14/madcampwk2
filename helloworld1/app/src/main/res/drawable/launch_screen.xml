@@ -8,12 +8,24 @@
 
     <!-- Your product logo - 144dp color version of your app icon -->
     <item
+        android:gravity="center"
+
         android:width ="300dp"
-        android:height="300dp">
+        android:height="100dp">
 
         <bitmap
-            android:src="@drawable/peng"
-            android:gravity="center_vertical"/>
+            android:src="@drawable/logo"
+            />
+
+    </item>
+    <item
+        android:gravity="bottom|center_horizontal"
+        android:width ="250dp"
+        android:height="220dp">
+
+        <bitmap
+            android:src="@drawable/pengg"
+            />
 
     </item>
 

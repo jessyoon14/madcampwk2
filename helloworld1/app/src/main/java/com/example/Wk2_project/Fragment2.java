@@ -19,6 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,6 +27,10 @@ import org.json.JSONObject;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import com.mikhaellopez.circularimageview.CircularImageView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +56,8 @@ public class Fragment2 extends Fragment {
     private ArrayList<String> files = new ArrayList<>();
     Button button1;
     GridView gallery;
+    public static TextView instaname;
+    public static CircularImageView profilepic;
     JSONArray jarray = new JSONArray();
     private static final int GALLERY_REQUEST_CODE = 10;
     private View view;
@@ -72,6 +79,10 @@ public class Fragment2 extends Fragment {
         View view = inflater.inflate (R.layout.fragment_fragment2, container, false);
         // Inflate the layout for this fragment
         button1 = view.findViewById(R.id.button);
+        profilepic = view.findViewById(R.id.profilepic);
+        if (PreActivity.profilep != null) profilepic.setImageBitmap(PreActivity.profilep);
+        instaname = view.findViewById(R.id.instaname);
+        if (PreActivity.user_name != null) instaname.setText(PreActivity.user_name);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,6 +230,7 @@ public class Fragment2 extends Fragment {
                     files.add(name);
                     //later add something more
                 }
+                Collections.reverse(files);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -302,7 +314,7 @@ public class Fragment2 extends Fragment {
                 picturesView = new ImageView(context);
                 picturesView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 picturesView
-                        .setLayoutParams(new GridView.LayoutParams(270, 270));
+                        .setLayoutParams(new GridView.LayoutParams(530, 530));
 
             } else {
                 picturesView = (ImageView) convertView;
@@ -311,7 +323,7 @@ public class Fragment2 extends Fragment {
 
             //String filename = images.get(0);
             //images.remove(0);
-            Glide.with(context).load("http://143.248.36.28:5000/files/" + images.get(position))
+            Glide.with(context).load("http://143.248.36.28:5000/files/" + images.get(position))//.diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.ic_launcher_background).centerCrop()
                     .into(picturesView);
 //
@@ -421,6 +433,108 @@ public class Fragment2 extends Fragment {
         }
         protected void onPostExecute(String result) {
             getActivity().recreate();
+            //new JSONTask().execute("http://143.248.36.28:5000/files");
+
         }
+    }
+
+
+    public class JSONTaskUpdate extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
+
+                HttpURLConnection con = null;
+                BufferedReader reader = null;
+
+                try{
+                    //URL url = new URL("http://192.168.25.16:3000/users");
+                    URL url = new URL(urls[0]);//url을 가져온다.
+                    con = (HttpURLConnection) url.openConnection();
+                    con.connect();//연결 수행
+
+                    //입력 스트림 생성
+                    InputStream stream = con.getInputStream();
+
+                    //속도를 향상시키고 부하를 줄이기 위한 버퍼를 선언한다.
+                    reader = new BufferedReader(new InputStreamReader(stream));
+
+                    //실제 데이터를 받는곳
+                    StringBuffer buffer = new StringBuffer();
+
+                    //line별 스트링을 받기 위한 temp 변수
+                    String line = "";
+
+                    //아래라인은 실제 reader에서 데이터를 가져오는 부분이다. 즉 node.js서버로부터 데이터를 가져온다.
+                    while((line = reader.readLine()) != null){
+                        buffer.append(line);
+                    }
+
+                    //다 가져오면 String 형변환을 수행한다. 이유는 protected String doInBackground(String... urls) 니까
+                    return buffer.toString();
+
+                    //아래는 예외처리 부분이다.
+                } catch (MalformedURLException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    //종료가 되면 disconnect메소드를 호출한다.
+                    if(con != null){
+                        con.disconnect();
+                    }
+                    try {
+                        //버퍼를 닫아준다.
+                        if(reader != null){
+                            reader.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }//finally 부분
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        //doInBackground메소드가 끝나면 여기로 와서 텍스트뷰의 값을 바꿔준다.
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d("My tag", result);
+            try {
+                jarray = new JSONArray(result);   // JSONArray 생성
+                for(int i=0; i < jarray.length(); i++){
+                    JSONObject jObject = jarray.getJSONObject(i);  // JSONObject 추출
+                    String name = jObject.getString("filename");
+                    files.add(name);
+                    //later add something more
+                }
+                Collections.reverse(files);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.d("tag", files.toString());
+
+//            ImageView picturesView;
+//            if (convertView == null) {
+//                picturesView = new ImageView(context);
+//                picturesView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                picturesView
+//                        .setLayoutParams(new GridView.LayoutParams(270, 270));
+//
+//            } else {
+//                picturesView = (ImageView) convertView;
+//            }
+
+//            Glide.with(getContext()).load("http://143.248.36.28:5000/files/" + images.get(files.get(0)))
+//                    .placeholder(R.drawable.ic_launcher_background).centerCrop()
+//                    .into(picturesView);
+        }
+
     }
 }
