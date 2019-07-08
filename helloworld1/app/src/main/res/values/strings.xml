@@ -3,6 +3,7 @@
     <string name="tab_text_1">CONTACT</string>
     <string name="tab_text_2">GALLERY</string>
     <string name="tab_text_3">CALENDER</string>
+    <string name="tab_text_4">SETTINGS</string>
     <string name="facebook_app_id">500270134114107</string>
     <string name="fb_login_protocol_scheme">fb500270134114107</string>
 </resources>
