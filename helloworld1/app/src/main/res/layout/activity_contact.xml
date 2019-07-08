@@ -52,4 +52,10 @@
             android:text="Modify" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/bt_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="사진 수정" />
+
 </LinearLayout>

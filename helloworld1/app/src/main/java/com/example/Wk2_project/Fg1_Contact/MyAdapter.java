@@ -68,6 +68,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
         final String Ph_number = contactInfoArrayList.get(position).phone;
         final String ID = contactInfoArrayList.get(position).id;
         final String Image_ID = contactInfoArrayList.get(position).image_id;
+        //final String Image = contactInfoArrayList.get(position).image;
         myViewHolder.msgButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Toast.makeText(view.getContext(), "메시지 보내기", Toast.LENGTH_SHORT).show();
@@ -93,6 +94,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
                 i.putExtra("ph_num", Ph_number);
                 i.putExtra("id", ID);
                 i.putExtra("image_id", Image_ID);
+                //i.putExtra("image", Image);
                 view.getContext().startActivity(i);
             }
         });

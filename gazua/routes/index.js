@@ -19,6 +19,19 @@ module.exports = function(app, Book, Personalc, Schedule)
         })
     });
 
+    // GET PERSONAL CONTACT
+    app.get('/api/books/email/:email/id/:id', function(req,res){
+        Book.findOne({email: req.params.email}, function(err, book){
+            if(err) return res.status(500).send({error: 'database failure'});
+            if(!book) return res.status(404).json({error: 'book not found'});
+            for(var i=0; i<book.contact_list.length;i++){
+                if(book.contact_list[i].id == req.params.id){
+                    res.json(book.contact_list[i].image);
+                }
+            }
+        })
+    });
+
     //GET SCHEDULE OF CERTAIN DAY
     app.get('/api/books/date/:date/email/:email', function(req,res){
         Book.findOne({email: req.params.email}, function(err, book){
@@ -79,6 +92,7 @@ module.exports = function(app, Book, Personalc, Schedule)
             if(err) return res.status(500).json({error: err});
             if(!book) return res.status(404).json({error: 'book not found'});
             var personalc = new Personalc();
+            personalc.image = req.body.image;
             personalc.name = req.body.name;
             personalc.phnumber = req.body.phnumber;
             personalc.date = req.body.date;
@@ -159,6 +173,45 @@ module.exports = function(app, Book, Personalc, Schedule)
     
         });
     
+    });
+
+    // MODIFY PERSONAL CONTACT
+    app.put('/api/books/email/:email/', function(req,res){
+        Book.findOne({email: req.params.email}, function(err, book){
+            if(err) return res.status(500).send({error: 'database failure'});
+            if(!book) return res.status(404).json({error: 'book not found'});
+            console.log(req.body.id)
+            for(var i=0; i<book.contact_list.length;i++){
+                if(book.contact_list[i]._id == req.body.id){
+                    book.contact_list[i].name = req.body.name;
+                    book.contact_list[i].phnumber = req.body.phnumber;
+                    book.contact_list[i].date = req.body.date;
+                }
+            }
+            book.save(function(err){
+                if(err) res.status(500).json({error: 'failed to update'});
+                res.json({message: 'book updated'});
+            });
+        })
+    });
+
+    // MODIFY PERSONAL SCHEDULE
+    app.put('/api/books/email/:email/schedule', function(req,res){
+        Book.findOne({email: req.params.email}, function(err, book){
+            if(err) return res.status(500).send({error: 'database failure'});
+            if(!book) return res.status(404).json({error: 'book not found'});
+            console.log(req.body.id)
+            for(var i=0; i<book.schedule_list.length;i++){
+                if(book.schedule_list[i]._id == req.body.id){
+                    book.schedule_list[i].date = req.body.date;
+                    book.schedule_list[i].schedule = req.body.schedule;
+                }
+            }
+            book.save(function(err){
+                if(err) res.status(500).json({error: 'failed to update'});
+                res.json({message: 'book updated'});
+            });
+        })
     });
 
     // DELETE BOOK

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var personalSchema = new Schema({
+    image: String,
     name : String,
     phnumber : String,
     date : String
@@ -9,6 +10,7 @@ var personalSchema = new Schema({
 
 
 var scheduleSchema = new Schema({
+
     date: String,
     schedule: String
 })

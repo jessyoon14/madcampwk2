@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +20,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.Wk2_project.MainActivity;
 import com.example.Wk2_project.PreActivity;
 import com.example.Wk2_project.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -33,9 +37,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 public class subactivity_contact extends Activity {
     String id;
+    String ImageDecode;
+    ImageView coImage;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -43,9 +50,10 @@ public class subactivity_contact extends Activity {
         View view = getLayoutInflater().from(this).inflate(R.layout.activity_contact,null);
         Button coDelete;
         Button coModify;
+        Button moimage;
         TextView coName;
         TextView coPhone;
-        ImageView coImage;
+        moimage = findViewById(R.id.bt_img);
         coDelete = findViewById(R.id.bt_deletecontact);
         coModify = findViewById(R.id.bt_modifycontact);
         coName = (TextView)findViewById(R.id.co_name);
@@ -58,16 +66,38 @@ public class subactivity_contact extends Activity {
         // Selected image id
         final String Name = i.getExtras().getString("name");
         final String Ph_number = i.getExtras().getString("ph_num");
+        //final String imagecc = i.getExtras().getString("image");
         id = i.getExtras().getString("id");
         //final long photo_id = i.getExtras().getLong("image_id");
         coName.setText(Name);
         coPhone.setText(Ph_number);
+        /*사진사진
+        try {
+            new JSONTask().execute("http://143.248.38.245:7080/api/books/email/" + email+"/id/"+id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+*/
+        //byte [] encodeByte= Base64.decode(imagecc,Base64.DEFAULT);
+
+        //coImage.setImageBitmap(BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length));
 
         //coImage.setImageBitmap(loadContactPhoto(getContentResolver(), id, photo_id));
 //
 //        Glide.with(this).load(coImage)
 //                .error(R.drawable.pic_1)
 //                .into(coImage);
+        moimage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, 10);
+            }
+        });
 
         coPhone.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -84,7 +114,13 @@ public class subactivity_contact extends Activity {
             public void onClick(View view) {
 
                 Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show();
-                new JSONTask2().execute("http://143.248.38.245:7080/api/books/"+email);
+                try {
+                    new JSONTask2().execute("http://143.248.38.245:7080/api/books/"+email).get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 finish();
             }
         });
@@ -104,6 +140,122 @@ public class subactivity_contact extends Activity {
 
 
     }
+    public class JSONTask extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
+
+                HttpURLConnection con = null;
+                BufferedReader reader = null;
+
+                try{
+                    //URL url = new URL("http://192.168.25.16:3000/users");
+                    URL url = new URL(urls[0]);//url을 가져온다.
+                    con = (HttpURLConnection) url.openConnection();
+                    con.connect();//연결 수행
+
+                    //입력 스트림 생성
+                    InputStream stream = con.getInputStream();
+
+                    //속도를 향상시키고 부하를 줄이기 위한 버퍼를 선언한다.
+                    reader = new BufferedReader(new InputStreamReader(stream));
+
+                    //실제 데이터를 받는곳
+                    StringBuffer buffer = new StringBuffer();
+
+                    //line별 스트링을 받기 위한 temp 변수
+                    String line = "";
+
+                    //아래라인은 실제 reader에서 데이터를 가져오는 부분이다. 즉 node.js서버로부터 데이터를 가져온다.
+                    while((line = reader.readLine()) != null){
+                        buffer.append(line);
+                    }
+
+                    //다 가져오면 String 형변환을 수행한다. 이유는 protected String doInBackground(String... urls) 니까
+                    return buffer.toString();
+
+                    //아래는 예외처리 부분이다.
+                } catch (MalformedURLException e){
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    //종료가 되면 disconnect메소드를 호출한다.
+                    if(con != null){
+                        con.disconnect();
+                    }
+                    try {
+                        //버퍼를 닫아준다.
+                        if(reader != null){
+                            reader.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }//finally 부분
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        //doInBackground메소드가 끝나면 여기로 와서 텍스트뷰의 값을 바꿔준다.
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            try {
+                byte [] encodeByte= Base64.decode(result,Base64.DEFAULT);
+
+                coImage.setImageBitmap(BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length));
+                JSONObject parray = new JSONObject(result);
+                //String image = parray.toString();
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+
+            if (requestCode == 10 && resultCode == RESULT_OK
+                    && null != data) {
+
+
+                Uri URI = data.getData();
+                String[] FILE = { MediaStore.Images.Media.DATA };
+
+
+                Cursor cursor = getContentResolver().query(URI,
+                        FILE, null, null, null);
+
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(FILE[0]);
+                ImageDecode = cursor.getString(columnIndex);
+                cursor.close();
+
+                coImage.setImageBitmap(BitmapFactory
+                        .decodeFile(ImageDecode));
+
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Please try again", Toast.LENGTH_LONG)
+                    .show();
+        }
+
+    }
+
+
+
+
     public class JSONTask2 extends AsyncTask<String, String, String> {
 
         @Override
@@ -200,7 +352,7 @@ public class subactivity_contact extends Activity {
                 HttpURLConnection con = null;
                 BufferedReader reader = null;
 
-                try{
+                try {
                     //URL url = new URL("http://192.168.25.16:3000/users");
                     URL url = new URL(urls[0]);//url을 가져온다.
                     con = (HttpURLConnection) url.openConnection();
@@ -220,7 +372,7 @@ public class subactivity_contact extends Activity {
                     String line = "";
 
                     //아래라인은 실제 reader에서 데이터를 가져오는 부분이다. 즉 node.js서버로부터 데이터를 가져온다.
-                    while((line = reader.readLine()) != null){
+                    while ((line = reader.readLine()) != null) {
                         buffer.append(line);
                     }
 
@@ -228,18 +380,18 @@ public class subactivity_contact extends Activity {
                     return buffer.toString();
 
                     //아래는 예외처리 부분이다.
-                } catch (MalformedURLException e){
+                } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
                     //종료가 되면 disconnect메소드를 호출한다.
-                    if(con != null){
+                    if (con != null) {
                         con.disconnect();
                     }
                     try {
                         //버퍼를 닫아준다.
-                        if(reader != null){
+                        if (reader != null) {
                             reader.close();
                         }
                     } catch (IOException e) {
@@ -267,6 +419,7 @@ public class subactivity_contact extends Activity {
         Toast.makeText(view.getContext(), "나가기", Toast.LENGTH_SHORT).show();
         finish();
     }
+    /*
     public Bitmap loadContactPhoto(ContentResolver cr, long id, long photo_id) {
         Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, id);
         InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(cr, uri);
@@ -321,4 +474,5 @@ public class subactivity_contact extends Activity {
         rBitmap = Bitmap.createScaledBitmap(oBitmap, (int) width, (int) height, true);
         return rBitmap;
     }
+    */
 }

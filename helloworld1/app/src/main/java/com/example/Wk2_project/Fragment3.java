@@ -57,7 +57,7 @@ public class Fragment3 extends Fragment {
     JSONArray jarray;
     JSONObject parray;
     String mdate;
-    ArrayList<String> mitem;
+    String mitem;
     String dating;
 
     @Nullable
@@ -198,7 +198,7 @@ public class Fragment3 extends Fragment {
         switch (requestCode){
             case 0:
                 mdate = data.getStringExtra("date");
-                mitem = data.getStringArrayListExtra("item");
+                mitem = data.getStringExtra("item");
                 new JSONTask1().execute("http://143.248.38.245:7080/api/books/schedule/"+email);
                 dating = mdate;
                 //go to JSONTask1 postexcute
@@ -211,13 +211,13 @@ public class Fragment3 extends Fragment {
                 break;
             case 1:
                 String mdate2 = data.getStringExtra("date2");
+                new JSONTask().execute("http://143.248.38.245:7080/api/books/date/" + dating + "/email/" + email);
 
-
-                dInfoArrayList = dbHelper.getResultof(mdate2);
+               // dInfoArrayList = dbHelper.getResultof(mdate2);
                 MemoInfoArrayList.clear();
-                for (int i=0; i<dInfoArrayList.size(); i++){
-                    MemoInfoArrayList.add(new MemoInfo(dInfoArrayList.get(i).id, dInfoArrayList.get(i).date,dInfoArrayList.get(i).content));
-                }
+                //for (int i=0; i<dInfoArrayList.size(); i++){
+                //    MemoInfoArrayList.add(new MemoInfo(dInfoArrayList.get(i).id, dInfoArrayList.get(i).date,dInfoArrayList.get(i).content));
+                //}
                 myAdapter.notifyDataSetChanged();
 
                 break;
@@ -335,7 +335,7 @@ public class Fragment3 extends Fragment {
 
                 //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
                 JSONObject jsonObject = new JSONObject();
-
+                Log.i("mitem", mitem);
                 jsonObject.accumulate("date", mdate);
                 jsonObject.accumulate("schedule", mitem);
                 HttpURLConnection con = null;

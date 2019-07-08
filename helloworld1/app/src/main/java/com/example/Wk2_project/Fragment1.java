@@ -167,12 +167,15 @@ public class Fragment1 extends Fragment {
                 for(int i=0; i < jarray.length(); i++){
                     JSONObject jObject = jarray.getJSONObject(i);  // JSONObject 추출
                     String id = jObject.getString("_id");
+
                     String name = jObject.getString("name");
                     String phnumber = jObject.getString("phnumber");
                     String date = jObject.getString("date");
-
+                    //String image = jObject.getString("image");
                     contactInfoArrayList.add(new ContactInfo(id, name, phnumber, date));
                     dInfoArrayList.add(new ContactInfo(id, name, phnumber, date));
+                    //contactInfoArrayList.add(new ContactInfo(id,image, name, phnumber, date));
+                    //dInfoArrayList.add(new ContactInfo(id,image, name, phnumber, date));
                     myAdapter.notifyDataSetChanged();
                 }
             } catch (JSONException e) {

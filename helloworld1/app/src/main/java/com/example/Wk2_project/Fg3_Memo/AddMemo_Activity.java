@@ -17,6 +17,7 @@ public class AddMemo_Activity extends AppCompatActivity {
     //ArrayList<MemoInfo> dInfoArrayList = new ArrayList<>();
     String mdate = null;
     ArrayList<String> mitem = new ArrayList<>();
+    String item;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +36,13 @@ public class AddMemo_Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String date = etDate.getText().toString();
-                String item = etItem.getText().toString();
+                item = etItem.getText().toString();
                 //int price = Integer.parseInt(etPrice.getText().toString());
                 //mdate.add(date);
                 mitem.add(item);
                 Intent data = new Intent();
                 data.putExtra("date", cur_date);
-                data.putExtra("item", mitem);
+                data.putExtra("item", item);
                 setResult(0,data);
                 finish();
             }
@@ -54,7 +55,7 @@ public class AddMemo_Activity extends AppCompatActivity {
                 //Toast.makeText(v.getContext(), "나가기", Toast.LENGTH_SHORT).show();
                 Intent data = new Intent();
                 data.putExtra("date", cur_date);
-                data.putExtra("item", mitem);
+                data.putExtra("item", item);
                 setResult(0,data);
                 finish();
             }
