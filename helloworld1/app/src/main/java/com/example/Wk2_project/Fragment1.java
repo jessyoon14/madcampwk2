@@ -61,7 +61,7 @@ public class Fragment1 extends Fragment {
     }
     public void getContactList() {
         Log.i("email", email);
-        new JSONTask().execute("http://143.248.36.28:7080/api/books/" + email);
+        new JSONTask().execute("http://143.248.38.245:7080/api/books/" + email);
         dInfoArrayList.clear();
         contactInfoArrayList.clear();
 /*
@@ -174,8 +174,6 @@ public class Fragment1 extends Fragment {
                     contactInfoArrayList.add(new ContactInfo(id, name, phnumber, date));
                     dInfoArrayList.add(new ContactInfo(id, name, phnumber, date));
                     myAdapter.notifyDataSetChanged();
-
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

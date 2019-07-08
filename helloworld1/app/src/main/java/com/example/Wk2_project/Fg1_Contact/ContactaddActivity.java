@@ -55,7 +55,7 @@ public class ContactaddActivity extends AppCompatActivity {
                 mname = name.getText().toString();
                 mphnumber = phnumber.getText().toString();
                 mdate = date.getText().toString();
-                new JSONTask1().execute("http://143.248.36.28:7080/api/books/"+email);
+                new JSONTask1().execute("http://143.248.38.245:7080/api/books/"+email);
 
             }
         });
@@ -98,7 +98,7 @@ public class ContactaddActivity extends AppCompatActivity {
 
             cursor.close();
 
-            new JSONTask1().execute("http://143.248.36.28:7080/api/books/"+email);
+            new JSONTask1().execute("http://143.248.38.245:7080/api/books/"+email);
 
         }
 

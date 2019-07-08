@@ -84,7 +84,7 @@ public class subactivity_contact extends Activity {
             public void onClick(View view) {
 
                 Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show();
-                new JSONTask2().execute("http://143.248.36.28:7080/api/books/"+email);
+                new JSONTask2().execute("http://143.248.38.245:7080/api/books/"+email);
                 finish();
             }
         });

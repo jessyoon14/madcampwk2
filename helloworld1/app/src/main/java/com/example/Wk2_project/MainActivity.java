@@ -21,11 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static final int MY_PERMISSION_CAMERA = 1111;
 
     public static final int MULTIPLE_PERMISSIONS = 10; // code you want.
-
+    final DBHelper dbHelper = new DBHelper(MainActivity.this, "MemoBook30.db", null, 1);
     String[] permissions= new String[]{
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_CONTACTS,
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
+
         return true;
     }
 
