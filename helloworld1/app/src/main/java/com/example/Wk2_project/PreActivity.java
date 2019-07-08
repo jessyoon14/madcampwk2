@@ -54,16 +54,22 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
+import static com.example.Wk2_project.Fragment2.profilepic;
+
 ///https://www.youtube.com/watch?time_continue=114&v=4Xq2FUJvE-c
 public class PreActivity extends AppCompatActivity {
     public static String user_email;
+    public static String user_name;
     TextView txt_create_account, displayName, emailID;
     ImageView displayImage;
+    public static Bitmap profilep;
     MaterialEditText edt_login_email,edt_login_password;
     Button btn_login;
     private String userEmail;
     LoginButton loginButton;
     String register_email;
+    public AccessToken accessToken = null;
+    boolean isLoggedIn;
     
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     IMyService iMyService;
@@ -82,7 +88,10 @@ public class PreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+
+        accessToken = AccessToken.getCurrentAccessToken();
         setContentView(R.layout.activity_pre);
+        isLoggedIn = accessToken != null && !accessToken.isExpired();
 
         //Init Service
         Retrofit retrofitClient = RetrofitClient.getInstance();
@@ -152,9 +161,10 @@ public class PreActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setPermissions(Arrays.asList(EMAIL, "public_profile"));
-        displayName = findViewById(R.id.displayName);
-        emailID = findViewById(R.id.emailID);
-        displayImage=findViewById(R.id.displayImage);
+        //displayName = findViewById(R.id.displayName);
+        //emailID = findViewById(R.id.emailID);
+        //displayImage=findViewById(R.id.displayImage);
+        LoginManager.getInstance().logOut();
 
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -282,12 +292,14 @@ public class PreActivity extends AppCompatActivity {
                     String name = object.getString("name");
                     String email = object.getString("email");
                     String image = object.getJSONObject("picture").getJSONObject("data").getString("url");
-                    displayName.setText(name);
-                    emailID.setText(email);
-                    userEmail = email;
+                    //displayName.setText(name);
+                    //emailID.setText(email);
+                    //userEmail = email;
                     new DownloadImageTask(displayImage).execute(image);
                     Intent i = new Intent(PreActivity.this, MainActivity.class);
-                    user_email = emailID.getText().toString();
+                    user_email = email;//emailID.getText().toString();
+                    user_name = name;
+                    //Fragment2.instaname.setText(name);
                     register_email = user_email;
                     new JSONTask6().execute("http://143.248.36.28:7080/api/books");
                     startActivity(i);
@@ -309,7 +321,7 @@ public class PreActivity extends AppCompatActivity {
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
         protected void onPreExecute() {
-            displayImage.setImageResource(R.drawable.ic_launcher_background);
+            //displayImage.setImageResource(R.drawable.ic_launcher_background);
         }
         public DownloadImageTask(ImageView bmImage1) {
             this.bmImage = bmImage1;
@@ -329,8 +341,10 @@ public class PreActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Bitmap result) {
-            if (result!= null)
-                bmImage.setImageBitmap(result);
+            profilep = result;
+            Fragment2.profilepic.setImageBitmap(result);
+            //if (result!= null)
+                //bmImage.setImageBitmap(result);
         }
     }
     public class JSONTask6 extends AsyncTask<String, String, String> {

@@ -1,4 +1,6 @@
 package com.example.Wk2_project;
 
-public class PhotoActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class PhotoActivity extends AppCompatActivity {
 }
